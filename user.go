@@ -29,3 +29,13 @@ func userCreate(name string, password string) {
 	}
 	db.Create(&User{Name: name, Password: password})
 }
+
+func userAll() []User {
+	db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
+	if err != nil {
+		panic("failed to connect database")
+	}
+	var users []User
+	db.Find(&users)
+	return users
+}
